@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>רובייקטיבי — מנתח דוחות פנסיה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Alef:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0a0e1a;
+    --bg-card: #111827;
+    --bg-card-alt: #0f1629;
+    --border: #1e293b;
+    --accent-blue: #38bdf8;
+    --accent-purple: #a78bfa;
+    --accent-pink: #f472b6;
+    --accent-green: #22c55e;
+    --accent-red: #ef4444;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Alef', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Animated background ── */
+  .bg-glow {
+    position: fixed;
+    top: -40%;
+    right: -20%;
+    width: 80vw;
+    height: 80vw;
+    background: radial-gradient(circle, rgba(56,189,248,0.06) 0%, rgba(167,139,250,0.04) 40%, transparent 70%);
+    pointer-events: none;
+    animation: drift 20s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+  .bg-glow-2 {
+    position: fixed;
+    bottom: -30%;
+    left: -15%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(244,114,182,0.05) 0%, rgba(167,139,250,0.03) 40%, transparent 70%);
+    pointer-events: none;
+    animation: drift 25s ease-in-out infinite alternate-reverse;
+    z-index: 0;
+  }
+  @keyframes drift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -30px) scale(1.1); }
+  }
+
+  /* ── Container ── */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 60px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .hero-icon {
+    font-size: 3.2rem;
+    margin-bottom: 12px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .hero-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .hero-sub {
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Intro text ── */
+  .intro {
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 40px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Comparison Table ── */
+  .table-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  .table-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.95rem;
+  }
+  .comparison-table thead th {
+    padding: 14px 16px;
+    font-family: 'Heebo', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-align: center;
+    border-bottom: 2px solid var(--border);
+  }
+  .comparison-table thead th:first-child {
+    text-align: right;
+    color: var(--text-secondary);
+  }
+  .comparison-table thead th:nth-child(2) {
+    background: linear-gradient(135deg, rgba(56,189,248,0.1), rgba(167,139,250,0.1));
+    color: var(--accent-blue);
+    border-radius: 10px 10px 0 0;
+  }
+  .comparison-table thead th:nth-child(3),
+  .comparison-table thead th:nth-child(4) {
+    color: var(--text-muted);
+  }
+  .comparison-table tbody td {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .comparison-table tbody td:first-child {
+    text-align: right;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+  }
+  .comparison-table tbody td:nth-child(2) {
+    background: rgba(56,189,248,0.03);
+  }
+  .comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .val-yes {
+    color: var(--accent-green);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .val-no {
+    color: var(--accent-red);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  /* ── Consent section ── */
+  .consent-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin-bottom: 32px;
+    backdrop-filter: blur(10px);
+  }
+  .consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+    line-height: 1.85;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    transition: color 0.3s;
+  }
+  .consent-label:hover {
+    color: var(--text-primary);
+  }
+  .consent-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border: 2px solid var(--text-muted);
+    border-radius: 6px;
+    margin-top: 4px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    background: transparent;
+  }
+  .consent-checkbox:checked {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    border-color: transparent;
+  }
+  .consent-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  /* ── CTA Buttons ── */
+  .cta-wrapper {
+    text-align: center;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.35s;
+    opacity: 0.35;
+    pointer-events: none;
+    transform: scale(0.98);
+    letter-spacing: 0.3px;
+    text-decoration: none;
+  }
+  /* כפתור מחשב — Streamlit (כחול-סגול) */
+  .cta-btn-desktop {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    box-shadow: 0 4px 24px rgba(56, 189, 248, 0);
+  }
+  .cta-btn-desktop.active {
+    box-shadow: 0 4px 24px rgba(56, 189, 248, 0.25);
+  }
+  .cta-btn-desktop.active:hover {
+    box-shadow: 0 6px 32px rgba(56, 189, 248, 0.35);
+  }
+  /* כפתור מובייל — WhatsApp (ירוק) */
+  .cta-btn-mobile {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    box-shadow: 0 4px 24px rgba(37, 211, 102, 0);
+  }
+  .cta-btn-mobile.active {
+    box-shadow: 0 4px 24px rgba(37, 211, 102, 0.30);
+  }
+  .cta-btn-mobile.active:hover {
+    box-shadow: 0 6px 32px rgba(37, 211, 102, 0.45);
+  }
+  .cta-btn.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+  }
+  .cta-btn.active:hover {
+    transform: scale(1.03);
+  }
+  .cta-btn.active:active {
+    transform: scale(0.98);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .container { padding: 32px 16px 48px; }
+    .hero-title { font-size: 2.2rem; }
+    .hero-sub { font-size: 1rem; }
+    .comparison-table { font-size: 0.82rem; }
+    .comparison-table thead th,
+    .comparison-table tbody td { padding: 10px 8px; }
+    .consent-section { padding: 24px 18px; }
+    .consent-label { font-size: 0.88rem; }
+    .cta-btn { padding: 14px 36px; font-size: 1.05rem; }
+    .table-wrapper { padding: 20px 14px; }
+  }
+
+  /* ── Page transition ── */
+  .page-landing {
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .page-landing.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    position: absolute;
+  }
+  .page-app {
+    display: none;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .page-app.visible {
+    display: block;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .app-frame {
+    width: 100%;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="bg-glow-2"></div>
+
+<!-- ═══════ Landing Page ═══════ -->
+<div class="page-landing" id="landing">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+      <span class="hero-icon">🤖</span>
+      <div class="hero-title">רובייקטיבי</div>
+      <div class="hero-sub">מנתח דוחות פנסיה אובייקטיבי · ללא אינטרס</div>
+    </div>
+
+    <!-- Intro -->
+    <div class="intro">
+      רובייקטיבי הוא רובוט שנוצר על ידי יועץ פנסיוני כדי לתת לך ניתוח אובייקטיבי של דוח הפנסיה שלך — בלי אינטרס, בלי מכירה, בלי עמלות.
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="table-wrapper">
+      <div class="table-title">מה ההבדל?</div>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>רובייקטיבי</th>
+            <th>סוכן ביטוח</th>
+            <th>יועץ פנסיוני</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>מחווה דעה על בסיס היכרות עם כלל המוצרים הפנסיוניים שיש ללקוח</td>
+            <td><span class="val-no">לא</span></td>
+            <td><span class="val-yes">כן</span></td>
+            <td><span class="val-yes">כן</span></td>
+          </tr>
+          <tr>
+            <td>נמצא בניגוד אינטרסים פוטנציאלי עם הלקוח</td>
+            <td><span class="val-yes">לא</span></td>
+            <td><span class="val-no">כן</span></td>
+            <td><span class="val-yes">לא</span></td>
+          </tr>
+          <tr>
+            <td>רשאי לתת ייעוץ פנסיוני</td>
+            <td><span class="val-no">לא</span></td>
+            <td><span class="val-no">לא</span></td>
+            <td><span class="val-yes">כן</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Consent -->
+    <div class="consent-section">
+      <label class="consent-label">
+        <input type="checkbox" class="consent-checkbox" id="consentCheck" onchange="toggleBtn()">
+        <span>אני מודע/ת לכך שהרובוט נוצר על ידי יועץ פנסיוני אובייקטיבי אך השימוש ברובוט איננו ייעוץ פנסיוני כהגדרתו בחוק, שהבינה המלאכותית עשויה לטעות, ושכל החלטה שאקבל על סמך שימוש ברובייקטיבי היא באחריותי בלבד.</span>
+      </label>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-wrapper">
+      <!-- כפתור מחשב — מוביל לאפליקציית Streamlit -->
+      <button class="cta-btn cta-btn-desktop" id="ctaBtnDesktop" onclick="proceedDesktop()" style="display:none">
+        🖥️ לבוא ננתח את דוח הפנסיה שלך &larr;
+      </button>
+      <!-- כפתור מובייל — מוביל לבוט WhatsApp -->
+      <button class="cta-btn cta-btn-mobile" id="ctaBtnMobile" onclick="proceedMobile()" style="display:none">
+        💬 לבוא ננתח את דוח הפנסיה שלך ב-WhatsApp &larr;
+      </button>
+    </div>
+
+    <div class="footer">רובייקטיבי · ניתוח אובייקטיבי · ללא אינטרס</div>
+
+  </div>
+</div>
+
+<!-- ═══════ App Page (iframe) ═══════ -->
+<div class="page-app" id="appPage">
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!--  החלף את ה-URL למטה לכתובת האפליקציה שלך ב-Streamlit Cloud  -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <iframe
+    class="app-frame"
+    id="appFrame"
+    src=""
+    allow="clipboard-write"
+    loading="lazy"
+  ></iframe>
+</div>
+
+<script>
+  const STREAMLIT_URL = 'https://ahituv-pension-bot.streamlit.app/?embedded=true';
+  const TELEGRAM_URL  = 'https://t.me/Robyectivibot';
+  const WHATSAPP_URL  = 'https://api.whatsapp.com/send/?phone=972559289298&text=%D7%A8%D7%95%D7%91%D7%99%D7%99%D7%A7%D7%98%D7%99%D7%91%D7%99,+%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%9F+%D7%91%D7%A0%D7%99%D7%AA%D7%95%D7%97+%D7%90%D7%95%D7%91%D7%99%D7%99%D7%A7%D7%98%D7%99%D7%91%D7%99+%D7%A9%D7%9C+%D7%93%D7%95%D7%97+%D7%94%D7%A4%D7%A0%D7%A1%D7%99%D7%94+%D7%A9%D7%9C%D7%99';
+
+  function isMobile() {
+    return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)
+        || window.innerWidth < 768;
+  }
+
+  // בטעינת הדף — הצג את הכפתור המתאים למכשיר
+  window.addEventListener('DOMContentLoaded', function () {
+    const btnDesktop = document.getElementById('ctaBtnDesktop');
+    const btnMobile  = document.getElementById('ctaBtnMobile');
+    if (isMobile()) {
+      btnMobile.style.display  = 'inline-block';
+      btnDesktop.style.display = 'none';
+    } else {
+      btnDesktop.style.display = 'inline-block';
+      btnMobile.style.display  = 'none';
+    }
+  });
+
+  // עדכון כפתור פעיל/לא פעיל לפי ה-checkbox
+  function toggleBtn() {
+    const checked    = document.getElementById('consentCheck').checked;
+    const btnDesktop = document.getElementById('ctaBtnDesktop');
+    const btnMobile  = document.getElementById('ctaBtnMobile');
+    btnDesktop.classList.toggle('active', checked);
+    btnMobile.classList.toggle('active', checked);
+  }
+
+  // כפתור מחשב → Streamlit (iframe)
+  function proceedDesktop() {
+    const landing = document.getElementById('landing');
+    const appPage = document.getElementById('appPage');
+    const frame   = document.getElementById('appFrame');
+    landing.classList.add('hidden');
+    setTimeout(() => {
+      frame.src = STREAMLIT_URL;
+      appPage.classList.add('visible');
+    }, 400);
+  }
+
+  // כפתור מובייל → WhatsApp
+  function proceedMobile() {
+    window.location.href = WHATSAPP_URL;
+  }
+</script>
+</body>
+</html>
+
