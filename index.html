@@ -491,9 +491,9 @@
   }
 
   // כפתור מובייל → WhatsApp
-  // window.top מבטיח ניווט מחוץ ל-iframe של Google Sites
+  // window.open פותח טאב חדש — עובד גם בתוך iframe של Google Sites
   function proceedMobile() {
-    window.top.location.href = WHATSAPP_URL;
+    window.open(WHATSAPP_URL, '_blank');
   }
 </script>
 </body>

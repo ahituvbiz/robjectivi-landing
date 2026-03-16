@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תנאי שימוש — רובייקטיבי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FAFAF7;
+            --card: #FFFFFF;
+            --text: #1A1A1A;
+            --muted: #6B6B6B;
+            --accent: #0088cc;
+            --accent-hover: #006da3;
+            --green: #2BA84A;
+            --green-hover: #239B3F;
+            --border: #E8E6E1;
+            --shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0088cc 0%, #005580 100%);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .header .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header .logo span {
+            display: inline-block;
+            margin-left: 0.4rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: -1.5rem auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            padding: 2rem 2rem 2.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--text);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.8rem;
+        }
+
+        .terms-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .terms-section h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .terms-section p, .terms-section li {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        .terms-section ul {
+            padding-right: 1.2rem;
+            margin-top: 0.4rem;
+        }
+
+        .terms-section li {
+            margin-bottom: 0.3rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 1.8rem 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 2rem 1rem;
+            }
+            .header .logo {
+                font-size: 1.8rem;
+            }
+            .card {
+                padding: 1.5rem 1.2rem 2rem;
+            }
+            .btn-consent {
+                font-size: 1rem;
+                padding: 0.8rem 2rem;
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">🤖 <span>רובייקטיבי</span></div>
+        <div class="subtitle">ניתוח אובייקטיבי של דוחות פנסיה</div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>תנאי שימוש</h2>
+
+            <div class="terms-section">
+                <h3>1. מהות השירות</h3>
+                <p>רובייקטיבי הוא כלי אוטומטי לניתוח דוחות פנסיה ישראליים. הכלי מבוסס על בינה מלאכותית ומספק ניתוח כללי של נתוני הדוח בלבד.</p>
+            </div>
+
+            <div class="terms-section">
+                <h3>2. אין זה ייעוץ פנסיוני</h3>
+                <p>השימוש ברובייקטיבי <strong>איננו מהווה ייעוץ פנסיוני</strong>, ייעוץ פיננסי, או המלצה מכל סוג שהוא. הניתוח מוצג למטרות מידע כללי בלבד ואינו מותאם אישית למצבך הכלכלי, לצרכיך או ליעדיך.</p>
+            </div>
+
+            <div class="terms-section">
+                <h3>3. מגבלות הכלי</h3>
+                <ul>
+                    <li>הניתוח מבוסס על בינה מלאכותית ועלולות ליפול בו טעויות</li>
+                    <li>ייתכנו אי-דיוקים בחילוץ הנתונים מהדוח</li>
+                    <li>הכלי אינו מכיר את מלוא הנסיבות האישיות שלך</li>
+                    <li>תוצאות הניתוח אינן מחליפות בחינה מקצועית של יועץ פנסיוני מורשה</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h3>4. אחריות המשתמש</h3>
+                <p>כל החלטה ופעולה שתעשה על בסיס המידע שמוצג בניתוח הן <strong>על אחריותך בלבד</strong>. מומלץ להיוועץ עם יועץ פנסיוני מורשה לפני קבלת החלטות משמעותיות.</p>
+            </div>
+
+            <div class="terms-section">
+                <h3>5. פרטיות ואבטחה</h3>
+                <p>הדוח שתשלח מעובד באופן אוטומטי ואינו נשמר לאחר סיום הניתוח. אנו לא שומרים מידע אישי מזהה מתוך הדוח.</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <p style="text-align:center; font-size:0.95rem; color:var(--muted);">
+                קראת את התנאים? חזור/י לטלגרם ולחץ/י על כפתור האישור.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        רובייקטיבי — ניתוח אובייקטיבי של דוחות פנסיה &copy; 2025
+    </div>
+
+</body>
+</html>
