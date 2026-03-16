@@ -419,11 +419,11 @@
     <div class="cta-wrapper">
       <!-- כפתור מחשב — מוביל לאפליקציית Streamlit -->
       <button class="cta-btn cta-btn-desktop" id="ctaBtnDesktop" onclick="proceedDesktop()" style="display:none">
-        🖥️ לבוא ננתח את דוח הפנסיה שלך &larr;
+        🖥️ בוא ננתח את דוח הפנסיה שלך &larr;
       </button>
       <!-- כפתור מובייל — מוביל לבוט WhatsApp -->
       <button class="cta-btn cta-btn-mobile" id="ctaBtnMobile" onclick="proceedMobile()" style="display:none">
-        💬 לבוא ננתח את דוח הפנסיה שלך ב-WhatsApp &larr;
+        💬 בוא ננתח את דוח הפנסיה שלך ב-WhatsApp &larr;
       </button>
     </div>
 
@@ -491,8 +491,9 @@
   }
 
   // כפתור מובייל → WhatsApp
+  // window.top מבטיח ניווט מחוץ ל-iframe של Google Sites
   function proceedMobile() {
-    window.location.href = WHATSAPP_URL;
+    window.top.location.href = WHATSAPP_URL;
   }
 </script>
 </body>
