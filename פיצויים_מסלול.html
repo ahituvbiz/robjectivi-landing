@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>רובייקטיבי — בקשה להעברת מסלול פיצויים</title>
+<title>רובייקטיבי — בחירת מסלול ההשקעה של כספי הפיצויים</title>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Alef:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -56,7 +56,7 @@
   /* ── Layout ── */
   .container {
     position: relative; z-index: 1;
-    max-width: 680px;
+    max-width: 720px;
     margin: 0 auto;
     padding: 48px 20px 64px;
   }
@@ -98,7 +98,7 @@
     font-size: 26px; font-weight: 800;
     color: var(--text-primary);
     line-height: 1.35;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .hero-title span {
     background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink));
@@ -107,7 +107,8 @@
   .hero-desc {
     font-size: 16px;
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.8;
+    text-align: right;
   }
   .hero-desc strong { color: var(--text-primary); }
 
@@ -145,17 +146,10 @@
   }
   .step-text strong { color: var(--text-primary); }
 
-  /* ── Funds grid ── */
-  .funds-section-title {
-    font-family: 'Heebo', sans-serif;
-    font-size: 18px; font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 16px;
-    padding-right: 4px;
-  }
+  /* ── Funds grid — 3×3 ── */
   .funds-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 40px;
   }
@@ -163,19 +157,22 @@
   /* Fund button */
   .fund-btn {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 10px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 16px 18px;
+    padding: 20px 12px 16px;
     cursor: pointer;
     text-decoration: none;
     color: var(--text-primary);
     transition: border-color 0.2s, transform 0.15s, background 0.2s;
     position: relative;
     overflow: hidden;
+    text-align: center;
+    min-height: 100px;
   }
   .fund-btn::before {
     content: '';
@@ -192,19 +189,8 @@
   .fund-btn:hover::before { opacity: 1; }
   .fund-btn:active { transform: translateY(0); }
 
-  .fund-info { text-align: right; }
-  .fund-name {
-    font-family: 'Heebo', sans-serif;
-    font-size: 16px; font-weight: 700;
-    color: var(--text-primary);
-    display: block; margin-bottom: 2px;
-  }
-  .fund-label {
-    font-size: 12px; color: var(--text-muted);
-  }
-
   .download-icon {
-    width: 36px; height: 36px; flex-shrink: 0;
+    width: 38px; height: 38px; flex-shrink: 0;
     background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(167,139,250,0.10));
     border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
@@ -215,24 +201,28 @@
     background: linear-gradient(135deg, rgba(56,189,248,0.28), rgba(167,139,250,0.20));
   }
 
-  /* Full-width button (9th fund) */
-  .fund-btn.full-width {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-    gap: 14px;
+  .fund-name {
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+    line-height: 1.3;
   }
-  .fund-btn.full-width .fund-info { flex: 1; }
+  .fund-label {
+    font-size: 11px; color: var(--text-muted);
+    display: block; margin-top: 2px;
+  }
 
   /* ── Disclaimer ── */
   .disclaimer {
     background: rgba(251,146,60,0.06);
     border: 1px solid rgba(251,146,60,0.2);
     border-radius: 12px;
-    padding: 16px 20px;
+    padding: 18px 22px;
     font-size: 13px;
     color: var(--text-muted);
-    line-height: 1.65;
-    text-align: center;
+    line-height: 1.7;
+    text-align: right;
   }
   .disclaimer strong { color: var(--accent-orange); }
 
@@ -249,9 +239,10 @@
   }
 
   /* ── Mobile ── */
-  @media (max-width: 480px) {
-    .funds-grid { grid-template-columns: 1fr; }
-    .fund-btn.full-width { grid-column: auto; }
+  @media (max-width: 520px) {
+    .funds-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .fund-btn { padding: 14px 8px 12px; min-height: 85px; }
+    .fund-name { font-size: 13px; }
     .hero-card { padding: 28px 20px; }
     .hero-title { font-size: 22px; }
   }
@@ -273,11 +264,11 @@
   <!-- Hero -->
   <div class="hero-card">
     <span class="hero-icon">📋</span>
-    <h1 class="hero-title">העברת כספי הפיצויים<br>ל<span>מסלול מנייתי</span></h1>
+    <h1 class="hero-title">בחירת מסלול ההשקעה<br>של <span>כספי הפיצויים</span></h1>
     <p class="hero-desc">
-      ככל הנראה כספי הפיצויים שלך נמצאים ב<strong>מסלול ברירת מחדל</strong>.<br>
-      הורד את הטופס המתאים לקרן שלך, מלא אותו ושלח לקרן —
-      וכספי הפיצויים יועברו למסלול המנייתי שממליץ לך הבוט.
+      כספי הפיצויים מהווים עד <strong>40% מהצבירה הפנסיונית</strong> שלנו.
+      כשאנו מנסים לשפר את התשואה ואת הפנסיה העתידית שלנו, חשוב שנוודא שכספי הפיצויים לא "נשארים מאחור".<br><br>
+      בכדי שנוכל להעביר אותם למסלול ההשקעה המומלץ, ייתכן שיהיה צורך לשלוח לקרן הפנסיה <strong>אישור מהמעביד</strong>.
     </p>
   </div>
 
@@ -286,7 +277,7 @@
     <div class="steps-title">איך זה עובד?</div>
     <div class="step">
       <div class="step-num">1</div>
-      <div class="step-text"><strong>הורד את הטופס</strong> של הקרן הפנסיונית שלך מהרשימה למטה</div>
+      <div class="step-text"><strong>הורד את הטופס</strong> של קרן הפנסיה שלך מהרשימה למטה</div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
@@ -294,115 +285,95 @@
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <div class="step-text"><strong>שלח לקרן</strong> — באתר הקרן, במייל, בפקס, או בדואר רשום</div>
+      <div class="step-text"><strong>החתם את המעסיק</strong> על הטופס — זהו שלב חובה לכספי הפיצויים</div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
-      <div class="step-text">אם הקרן דורשת <strong>אישור מעסיק</strong> — הדפס גם אישור ממנו ושלח יחד</div>
+      <div class="step-text"><strong>שלח לקרן</strong> — באתר הקרן, במייל, בפקס, או בדואר רשום</div>
     </div>
   </div>
 
-  <!-- Funds -->
-  <div class="funds-section-title">📂 בחר את הקרן שלך</div>
+  <!-- Funds grid 3×3 -->
   <div class="funds-grid">
 
     <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/אינפיניטי.pdf"
        target="_blank" rel="noopener">
-      <div class="fund-info">
-        <span class="fund-name">אינפיניטי</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
       <div class="download-icon">⬇️</div>
+      <span class="fund-name">אינפיניטי</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
     <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/אלטשולר.pdf"
        target="_blank" rel="noopener">
-      <div class="fund-info">
-        <span class="fund-name">אלטשולר שחם</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
       <div class="download-icon">⬇️</div>
+      <span class="fund-name">אלטשולר שחם</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
     <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/הפניקס.pdf"
        target="_blank" rel="noopener">
-      <div class="fund-info">
-        <span class="fund-name">הפניקס</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
       <div class="download-icon">⬇️</div>
+      <span class="fund-name">הפניקס</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
     <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/הראל.pdf"
        target="_blank" rel="noopener">
-      <div class="fund-info">
-        <span class="fund-name">הראל</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
       <div class="download-icon">⬇️</div>
+      <span class="fund-name">הראל</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
     <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/כלל.pdf"
        target="_blank" rel="noopener">
-      <div class="fund-info">
-        <span class="fund-name">כלל</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
       <div class="download-icon">⬇️</div>
+      <span class="fund-name">כלל</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
     <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/מגדל.pdf"
        target="_blank" rel="noopener">
-      <div class="fund-info">
-        <span class="fund-name">מגדל</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
       <div class="download-icon">⬇️</div>
+      <span class="fund-name">מגדל</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
     <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/מור.pdf"
        target="_blank" rel="noopener">
-      <div class="fund-info">
-        <span class="fund-name">מור</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
       <div class="download-icon">⬇️</div>
+      <span class="fund-name">מור</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
     <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/מיטב.pdf"
        target="_blank" rel="noopener">
-      <div class="fund-info">
-        <span class="fund-name">מיטב</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
       <div class="download-icon">⬇️</div>
+      <span class="fund-name">מיטב</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
-    <a class="fund-btn full-width"
+    <a class="fund-btn"
        href="https://ahituvbiz.github.io/robjectivi-landing/פיצויים/מנורה.pdf"
        target="_blank" rel="noopener">
       <div class="download-icon">⬇️</div>
-      <div class="fund-info">
-        <span class="fund-name">מנורה מבטחים</span>
-        <span class="fund-label">הורד טופס PDF</span>
-      </div>
+      <span class="fund-name">מנורה מבטחים</span>
+      <span class="fund-label">הורד טופס PDF</span>
     </a>
 
   </div>
 
   <!-- Disclaimer -->
   <div class="disclaimer">
-    <strong>שים לב:</strong> מסמכים אלו הם בקשות להחלפת מסלול השקעה בלבד.
-    פיצויים ניתן להעביר בין מסלולים ללא ניכוי מס, אך לפני ביצוע כל פעולה — מומלץ לוודא עם הקרן.
-    רובייקטיבי אינו יועץ פנסיוני מורשה וכל החלטה היא באחריות המשתמש בלבד.
+    <strong>⚠️ מומלץ לעקוב אחרי יישום הבקשה.</strong> לעתים הטופס לא נקלט בקרן בצורה תקינה וכספי הפיצויים נשארים במסלול ברירת המחדל — ודא עם הקרן שהשינוי אכן בוצע.<br><br>
+    רובייקטיבי אינו יועץ פנסיוני. האחריות על ביצוע כל פעולה היא על המשתמש בלבד.
   </div>
 
   <!-- Footer -->
